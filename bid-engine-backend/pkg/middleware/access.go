@@ -16,7 +16,7 @@ var (
 	allowedDomains     []string
 )
 
-// 从配置读取允许的域名后缀，逗号分隔；例如：cors_allowed_domains: "modelapps.cn"
+// 从配置读取允许的域名后缀，逗号分隔；例如：cors_allowed_domains: "example.com,example.org"
 func getAllowedDomains() []string {
 	onceAllowedDomains.Do(func() {
 		val := config.GetConfig().GetProperty("cors_allowed_domains")
