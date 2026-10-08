@@ -160,56 +160,7 @@
 
 ## 技术架构
 
-```mermaid
-flowchart TB
-  subgraph U["用户与入口"]
-    B["浏览器 Web 工作台"]
-    FS["飞书 扫码登录 / 情报提醒"]
-    OP["OpenAPI 调用方"]
-  end
-
-  subgraph APP["应用服务层"]
-    FE["前端 Next.js 14 App Router<br/>Chakra UI + TipTap"]
-    BE["后端 Go + Gin<br/>业务 API / SSE / 任务投递 / 定时调度"]
-  end
-
-  subgraph WORK["异步作业"]
-    WK["后台任务与轮次调度<br/>解析 · 生成 · 审核 · 采集 · 订阅匹配"]
-  end
-
-  subgraph BASIC["基础能力服务（Docker）"]
-    DOC["Docling 文档解析"]
-    CONV["Doc-Converter<br/>doc/docx 转 PDF"]
-    COL["tender-collection 采集服务<br/>接口优先 + Playwright 兜底"]
-  end
-
-  subgraph AI["AI 能力"]
-    LLM["OpenAI 兼容模型服务<br/>用户级 + 系统级配置"]
-  end
-
-  subgraph DATA["存储层"]
-    DB[("MySQL 8")]
-    RD[("Redis 7")]
-    OSS[("MinIO")]
-  end
-
-  B --> FE
-  OP --> BE
-  FS -.-> BE
-  FE -->|"同源代理 /api"| BE
-  BE --> WK
-  BE --> LLM
-  WK --> LLM
-  WK --> DOC
-  WK --> CONV
-  WK --> COL
-  BE --> DB
-  BE --> RD
-  BE --> OSS
-  WK --> DB
-  WK --> RD
-  WK --> OSS
-```
+![BidEngine 标擎技术架构图](images/ArchitectureDiagram.png)
 
 ### 技术选型
 
