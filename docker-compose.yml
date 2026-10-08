@@ -1,0 +1,109 @@
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - /Users/admin/Desktop/smart-bider/data/redis:/data
+
+  docling:
+    image: ghcr.io/docling-project/docling-serve:v1.16.1
+    container_name: docling
+    restart: always
+    ports:
+      - "5002:5001"
+    environment:
+      DOCLING_SERVE_ENABLE_UI: "true"
+      DOCLING_SERVE_MAX_SYNC_WAIT: "600"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    platform: linux/amd64
+
+  # 文档转换服务：把 .doc/.docx 转成 PDF。
+  # 独立部署的原因：LibreOffice 依赖数百 MB，功能独立且稳定；拆分后还能让后端镜像更轻量。
+  doc-converter:
+    image: doc-converter:v1
+    build:
+      context: ./bid-engine-backend
+      dockerfile: Dockerfile.converter
+    container_name: doc-converter
+    restart: always
+    # 由 docker 提供 init 进程，回收 LibreOffice 可能留下的僵尸子进程
+    init: true
+    ports:
+      - "5010:5010"
+    environment:
+      PORT: "5010"
+      MAX_CONCURRENT: "2"
+      CONVERT_TIMEOUT_SEC: "240"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5010/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  minio:
+    image: minio/minio:RELEASE.2025-06-13T11-33-47Z
+    container_name: minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin123456
+    volumes:
+      - /Users/admin/Desktop/smart-bider/data/minio:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # 招标情报采集服务：把招标站点变成结构化的「规范公告文档」。
+  # 作为基础服务常驻，本地一键启动（start.sh）与容器部署两种模式共用；
+  # start.sh 只做健康检查提醒，不负责启停该容器。
+  #
+  # 构建（镜像带显式 tag，不使用 latest）：
+  #   docker compose -f docker-compose.yml build tender-intel-collector
+  #   -> tender-intel-collector:v1
+  # 启动：
+  #   docker compose -f docker-compose.yml up -d tender-intel-collector
+  tender-intel-collector:
+    build:
+      context: ./tender-collection
+      dockerfile: Dockerfile
+      args:
+        PLAYWRIGHT_IMAGE: mcr.microsoft.com/playwright/python:v1.47.0-jammy
+    image: tender-intel-collector:v1
+    container_name: tender-intel-collector
+    restart: always
+    ports:
+      - "5011:5011"
+    environment:
+      PORT: "5011"
+      TZ: Asia/Shanghai
+      RECIPES_DIR: /service/recipes
+      REQUEST_TIMEOUT_SEC: "30"
+      MAX_RETRIES: "2"
+      MIN_DELAY_SEC: "1.0"
+      MAX_DELAY_SEC: "3.0"
+      MAX_ITEMS_PER_SOURCE: "50"
+      MAX_BROWSER_CONTEXTS: "2"
+      HEADLESS: "true"
+    # 浏览器渲染需要更大的共享内存，避免 Chromium 崩溃
+    shm_size: "1gb"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5011/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s

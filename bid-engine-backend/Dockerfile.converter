@@ -1,0 +1,43 @@
+ARG CACHE_BUST
+FROM golang:1.25-alpine AS build
+
+WORKDIR /build
+
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o converter ./cmd/converter
+
+
+FROM ubuntu:26.04
+
+WORKDIR /service
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
+ENV PORT=5010
+ENV MAX_CONCURRENT=2
+ENV CONVERT_TIMEOUT_SEC=240
+
+# 文档转换专用镜像：保留高质量中文字体（转换结果字形与原来一致）
+# - ubuntu:26.04 自带 LibreOffice 26.2：7.3.7 与 24.2 在部分含内嵌 OLE 对象的公文类 docx 上会崩溃
+#   （Signal 6，栈在 writerfilter/OLE 预览路径），实测同一份失败文件在 26.2 上可正常转换
+# - libreoffice-*-nogui：无 GUI 的 Writer，负责 .doc/.docx → PDF
+# - fonts-noto-cjk：CJK 字形覆盖最完整的开源字体，保证生僻字与多语种
+# - curl：仅用于容器健康检查
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      tzdata ca-certificates fontconfig curl \
+      libreoffice-core-nogui libreoffice-writer-nogui \
+      fonts-noto-cjk && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo "$TZ" > /etc/timezone && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /build/converter ./
+
+EXPOSE 5010
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+    CMD curl -fsS http://localhost:5010/healthz || exit 1
+
+CMD ["./converter"]

@@ -1,0 +1,13 @@
+{
+  "sourceKey": "zj_ggzy",
+  "name": "浙江省公共资源交易服务平台",
+  "homepage": "https://ggzy.zj.gov.cn/",
+  "category": "地方级",
+  "region": "浙江省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzy.zj.gov.cn/jyxxgk/list.html?cate=%E5%B7%A5%E7%A8%8B%E5%BB%BA%E8%AE%BE&catenum=002001&mycatenum=002001001"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "列表为动态加载，需浏览器渲染"
+}

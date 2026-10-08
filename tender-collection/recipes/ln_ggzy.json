@@ -1,0 +1,20 @@
+{
+  "sourceKey": "ln_ggzy",
+  "name": "辽宁省公共资源交易服务平台",
+  "homepage": "https://ggzy.ln.gov.cn/",
+  "category": "地方级",
+  "region": "辽宁省",
+  "discoveryMode": "api",
+  "needsBrowser": false,
+  "listUrls": ["https://ggzy.ln.gov.cn/was5/web/search?page=1&perpage=20&channelid=211892&docchannel=149565,149559&orderby=-DOCRELTIME"],
+  "apiMethod": "GET",
+  "apiItemsPath": "datas",
+  "apiFieldMap": {
+    "url": "DOCPUBURL",
+    "title": "DOCTITLE",
+    "publish_date": "DOCRELTIME"
+  },
+  "maxItems": 20,
+  "maxPages": 1,
+  "note": "TRS WAS5 站内检索接口，直接返回 JSON（去掉 callback 参数即可）。channelid=211892 为交易信息总频，docchannel=149565(政府采购·采购公告)+149559(工程建设·招标公告) 收窄到公告类目；perpage 上限约 20，超过会命中站点防护页。"
+}

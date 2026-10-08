@@ -1,0 +1,14 @@
+{
+  "sourceKey": "gz_ggzy",
+  "name": "贵州省公共资源交易网",
+  "homepage": "https://ggzy.guizhou.gov.cn/",
+  "category": "地方级",
+  "region": "贵州省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzy.guizhou.gov.cn/"],
+  "linkPattern": "tradeInfo/detailHtml",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "首页滚动交易公告，详情页统一为 /tradeInfo/detailHtml?metaId=...。"
+}

@@ -1,0 +1,35 @@
+<svg width="160px" height="160px" viewBox="0 0 160 160" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="shield-grad">
+      <stop stop-color="#6E6EE9" offset="0%"/>
+      <stop stop-color="#5B5BEA" offset="100%"/>
+    </linearGradient>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="body-grad">
+      <stop stop-color="#F4F4F9" offset="0%"/>
+      <stop stop-color="#E2E2E9" offset="100%"/>
+    </linearGradient>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="paper-grad">
+      <stop stop-color="#FCFCFF" offset="0%"/>
+      <stop stop-color="#F3F3F7" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+    <circle fill="#EAEEF9" cx="80" cy="80" r="72"/>
+    <circle fill="#F0F2F6" cx="80" cy="80" r="58"/>
+    <!-- Person silhouette -->
+    <circle fill="url(#body-grad)" cx="80" cy="52" r="18"/>
+    <path d="M48,110 C48,88 60,78 80,78 C100,78 112,88 112,110 L112,118 C112,120 110,122 108,122 L52,122 C50,122 48,120 48,118 Z" fill="url(#body-grad)"/>
+    <!-- Lock icon -->
+    <rect fill="url(#shield-grad)" x="68" y="96" width="24" height="20" rx="4"/>
+    <path d="M73,96 L73,90 C73,85 76,82 80,82 C84,82 87,85 87,90 L87,96" stroke="url(#shield-grad)" strokeWidth="3" fill="none" strokeLinecap="round"/>
+    <circle fill="#FFFFFF" cx="80" cy="106" r="3"/>
+    <rect fill="#FFFFFF" x="79" y="107" width="2" height="5" rx="1"/>
+    <!-- Decorative elements -->
+    <circle fill="#DCDCE4" cx="30" cy="40" r="4"/>
+    <circle fill="#DCDCE4" cx="130" cy="45" r="3"/>
+    <circle fill="#EDEDF2" cx="25" cy="115" r="5"/>
+    <circle fill="#EDEDF2" cx="135" cy="110" r="4"/>
+    <circle fill="#EDEDF2" cx="40" cy="80" r="2.5"/>
+    <circle fill="#EDEDF2" cx="120" cy="75" r="2"/>
+  </g>
+</svg>

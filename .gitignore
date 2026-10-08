@@ -1,0 +1,95 @@
+# Dependencies
+node_modules/
+.yarn/
+.pnp.*
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Frontend build artifacts
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Go compiled binaries
+*.exe
+bid-engine-backend/main
+bid-engine-backend/test_config_init
+bid-engine-backend/test_panic
+
+# Backend runtime artifacts
+bid-engine-backend/logs/
+bid-engine-backend/tmp/
+
+# docs（产品文档默认忽略；V3 的可执行迁移和设计规范纳入版本管理）
+docs/*
+!docs/sql/
+docs/sql/*
+!docs/sql/bid_analysis_v3.sql
+!docs/sql/bid_analysis_v3_cutover.sql
+!docs/sql/bid_analysis_v3_indexes.sql
+!docs/sql/bid_analysis_v3_source_table_regions.sql
+!docs/sql/llm_context_budget.sql
+!docs/sql/home_dashboard_indexes.sql
+!docs/sql/tender-intel.sql
+!docs/sql/feishu-import.sql
+!docs/design/
+docs/design/*
+!docs/design/deep-sea-workbench.md
+!docs/prototypes/
+docs/prototypes/*
+!docs/prototypes/bid-analysis-v3-review/
+!docs/prototypes/bid-analysis-v3-review/**
+.agents/
+.claude/
+.codegraph/
+memory/
+screenshots/
+CLAUDE.md
+MEMORY.md
+.mcp.json
+# Backend runtime temp (PDF conversion etc.)
+bid-engine-backend/tmp/
+design-drafts/
+.mcp.json
+
+# Agent tooling scratch
+.superpowers/
+
+# Hallmark design-agent metadata (at any directory depth)
+.hallmark/
+hallmark/

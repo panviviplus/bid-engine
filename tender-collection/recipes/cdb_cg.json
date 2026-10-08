@@ -1,0 +1,13 @@
+{
+  "sourceKey": "cdb_cg",
+  "name": "国家开发银行采购平台",
+  "homepage": "https://cg.cdb.com.cn/",
+  "category": "银行",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://cg.cdb.com.cn/cmscaigou/index.html"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "栏目列表在页面内异步加载"
+}

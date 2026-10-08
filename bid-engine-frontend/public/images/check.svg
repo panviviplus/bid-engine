@@ -1,0 +1,26 @@
+<svg width="180px" height="180px" viewBox="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="circle-grad">
+      <stop stop-color="#6E6EE9" offset="0%"/>
+      <stop stop-color="#5B5BEA" offset="100%"/>
+    </linearGradient>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="paper-grad">
+      <stop stop-color="#FCFCFF" offset="0%"/>
+      <stop stop-color="#F3F3F7" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+    <circle fill="#EAEEF9" cx="90" cy="90" r="80"/>
+    <circle fill="#F0F2F6" cx="90" cy="90" r="65"/>
+    <rect fill="url(#paper-grad)" x="50" y="30" width="70" height="90" rx="6"/>
+    <rect fill="#E8E8EF" x="62" y="52" width="36" height="4" rx="2"/>
+    <rect fill="#E8E8EF" x="62" y="62" width="46" height="4" rx="2"/>
+    <rect fill="#E8E8EF" x="62" y="72" width="30" height="4" rx="2"/>
+    <circle fill="url(#circle-grad)" cx="110" cy="115" r="28"/>
+    <path d="M97,115 L106,124 L123,107" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    <circle fill="#DCDCE4" cx="35" cy="50" r="4"/>
+    <circle fill="#DCDCE4" cx="145" cy="55" r="3"/>
+    <circle fill="#EDEDF2" cx="30" cy="130" r="5"/>
+    <circle fill="#EDEDF2" cx="150" cy="125" r="4"/>
+  </g>
+</svg>

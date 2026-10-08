@@ -1,0 +1,13 @@
+{
+  "sourceKey": "cmcc_b2b",
+  "name": "中国移动采购与招标网",
+  "homepage": "https://b2b.10086.cn/",
+  "category": "国央企",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://b2b.10086.cn/"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "单页应用，需浏览器渲染；列表中部分公告需登录后查看详情，抽取失败会被记为 items.error"
+}

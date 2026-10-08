@@ -1,0 +1,14 @@
+{
+  "sourceKey": "cecbid",
+  "name": "中国招标投标网",
+  "homepage": "https://www.cecbid.org.cn/",
+  "category": "国家级",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": false,
+  "listUrls": ["https://www.cecbid.org.cn/tenders/list"],
+  "linkPattern": "/tenders/details/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "招标公告列表为静态服务端渲染，可直接抓到 /tenders/details/{hash} 详情链接；同站还有 results（中标公告）、previews（意向预告）频道，后续可扩为独立源。"
+}

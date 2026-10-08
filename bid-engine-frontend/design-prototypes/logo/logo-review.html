@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>标擎 Logo 候选对照</title>
+  <style>
+    /* Hallmark · artifact: logo comparison board · genre: modern-minimal · theme: BidEngine deep-sea/gold · contrast: pass (40–41) · mobile: pass · slop: pass */
+    /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V5 */
+    :root {
+      --color-canvas: oklch(96% 0.009 240); --color-paper: oklch(98.5% 0.005 240);
+      --color-paper-2: oklch(93.5% 0.015 240); --color-control: oklch(19% 0.038 245);
+      --color-ink: oklch(22% 0.026 245); --color-ink-2: oklch(35% 0.026 245);
+      --color-muted: oklch(50% 0.025 245); --color-rule: oklch(86% 0.016 240);
+      --color-primary: oklch(42% 0.09 255); --color-accent: oklch(75% 0.14 83);
+      --color-accent-ink: oklch(20% 0.035 245); --color-focus: oklch(55% 0.16 75); --color-success: oklch(45% 0.13 158);
+      --color-success-soft: oklch(94% 0.035 158); --color-shadow: oklch(15% 0.03 245 / .08);
+      --font-display: "Avenir Next", "PingFang SC", sans-serif; --font-body: "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-outlier: "SFMono-Regular", "Menlo", monospace; --space-2xs: .25rem; --space-xs: .5rem; --space-sm: .75rem; --space-md: 1rem;
+      --space-lg: 1.5rem; --space-xl: 2.5rem; --space-2xl: 4rem; --text-xs: .75rem; --text-sm: .875rem;
+      --text-base: 1rem; --text-md: 1.25rem; --text-lg: 1.5625rem; --text-xl: 1.953rem;
+      --text-display: clamp(2.25rem, 4vw, 4.5rem); --radius-sm: .5rem; --radius-md: .75rem; --radius-card: 1rem; --radius-pill: 999px;
+      --ease-out: cubic-bezier(.16,1,.3,1); --dur-micro: 120ms; --dur-short: 220ms; --z-tooltip: 600;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; overflow-x: clip; }
+    body { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-body); line-height: 1.55; }
+    button { font: inherit; color: inherit; }
+    :focus { outline: none; } :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    main { width: min(100%, 96rem); margin-inline: auto; padding: clamp(1rem, 4vw, 4rem); }
+    header { display: grid; gap: var(--space-md); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-rule); }
+    header h1 { min-width: 0; margin: 0; max-width: 20ch; font-family: var(--font-display); font-size: var(--text-display); line-height: 1.05; letter-spacing: -.045em; overflow-wrap: anywhere; }
+    header p { max-width: 70ch; margin: 0; color: var(--color-muted); }
+    .criteria { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+    .criteria span { min-height: 2rem; display: inline-flex; align-items: center; padding-inline: var(--space-sm); border: 1px solid var(--color-rule); border-radius: var(--radius-pill); background: var(--color-paper); font-size: var(--text-sm); white-space: nowrap; }
+    .candidates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); padding-block: var(--space-xl); }
+    .candidate { min-width: 0; display: flex; flex-direction: column; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); overflow: clip; }
+    .lockup { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: var(--color-control); }
+    .candidate-body { display: flex; flex: 1; flex-direction: column; gap: var(--space-md); padding: var(--space-lg); }
+    .candidate-title { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+    .candidate-title h2 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -.03em; }
+    .candidate-code { font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-primary); }
+    .candidate p { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .candidate ul { margin: 0; padding-inline-start: 1.15rem; color: var(--color-ink-2); font-size: var(--text-sm); }
+    .candidate li + li { margin-top: var(--space-xs); }
+    .select-logo { min-height: 44px; margin-top: auto; border: 1px solid var(--color-control); border-radius: var(--radius-pill); background: var(--color-paper); cursor: pointer; white-space: nowrap; font-weight: 700; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+    .select-logo[aria-pressed="true"] { background: var(--color-control); color: var(--color-paper); }
+    .select-logo:active { transform: translateY(1px); }
+    .scale-section { padding-block: var(--space-xl); border-top: 1px solid var(--color-rule); }
+    .scale-section h2 { margin: 0 0 var(--space-xs); font-family: var(--font-display); font-size: var(--text-xl); letter-spacing: -.035em; }
+    .scale-section > p { margin: 0 0 var(--space-lg); color: var(--color-muted); }
+    .scale-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg); }
+    .scale-card { min-width: 0; border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); overflow: clip; }
+    .scale-card h3 { margin: 0; padding: var(--space-md); font-family: var(--font-display); }
+    .scale-surface { min-height: 11rem; display: flex; align-items: end; justify-content: center; gap: var(--space-lg); padding: var(--space-lg); background: var(--color-paper-2); }
+    .scale-surface[data-surface="dark"] { background: var(--color-control); color: var(--color-paper); }
+    .sample { display: grid; justify-items: center; gap: var(--space-xs); }
+    .sample img { display: block; object-fit: cover; border-radius: 22%; }
+    .sample span { font-family: var(--font-body); font-size: var(--text-xs); }
+    .s128 { width: 8rem; height: 8rem; } .s64 { width: 4rem; height: 4rem; }
+    .s32 { width: 2rem; height: 2rem; } .s16 { width: 1rem; height: 1rem; }
+    .note { margin-top: var(--space-lg); padding: var(--space-md) var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); color: var(--color-ink-2); }
+    .note strong { font-family: var(--font-display); }
+    .demo-status { position: fixed; right: var(--space-md); bottom: var(--space-md); max-width: min(28rem, calc(100% - 2rem)); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-pill); background: var(--color-control); color: var(--color-paper); opacity: 0; transform: translateY(.5rem); pointer-events: none; z-index: var(--z-tooltip); transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out); }
+    .demo-status[data-open="true"] { opacity: 1; transform: none; }
+    button:disabled, [aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+    [data-state="loading"] { opacity: .65; cursor: wait; }
+    [data-state="error"] { border-color: var(--color-primary) !important; }
+    [data-state="success"] { border-color: var(--color-success) !important; }
+    @media (hover: hover) and (pointer: fine) {
+      .candidate:hover { border-color: var(--color-primary); }
+      .select-logo:hover { background: var(--color-control); color: var(--color-paper); }
+    }
+    @media (max-width: 69.99rem) { .candidates, .scale-grid { grid-template-columns: minmax(0, 1fr); } .lockup { max-height: 34rem; object-fit: contain; } }
+    @media (max-width: 39.99rem) { main { padding-inline: var(--space-md); } .candidate-body { padding: var(--space-md); } .scale-surface { align-items: center; flex-wrap: wrap; } .s128 { width: 6rem; height: 6rem; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 150ms !important; transition-duration: 150ms !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>标擎 Logo 候选对照</h1>
+      <p>每套都包含紧凑主标和 mark-only 小图标。主标用于品牌展示；浏览器 tab、收起侧栏和头像级场景只使用 mark-only，避免 16–32px 下文字不可读。</p>
+      <div class="criteria"><span>深海蓝 / 金色</span><span>ToP 专业投标人员</span><span>16px 可识别</span><span>无额外 tagline</span><span>当前生产图标未覆盖</span></div>
+    </header>
+
+    <section class="candidates" aria-label="Logo 候选">
+      <article class="candidate"><img class="lockup" src="logo-a-current-refined.png" width="1254" height="1254" alt="Logo A，精修当前金色 B 与 BidEngine 文字"><div class="candidate-body"><div class="candidate-title"><h2>A · 精修当前标志</h2><span class="candidate-code">CURRENT+</span></div><p>保留现有角形 B 与金白字标，核心变化是把图形和文字放大到接近满幅，直接解决当前有效内容过小的问题。</p><ul><li>品牌传承最强</li><li>主标铺满程度最高</li><li>mark-only 较有力量感</li></ul><button class="select-logo" type="button" data-choice="A" aria-pressed="false">选择 Logo A</button></div></article>
+      <article class="candidate"><img class="lockup" src="logo-b-document-fold.png" width="1254" height="1254" alt="Logo B，文档折角构成的金色 B 与 BidEngine 文字"><div class="candidate-body"><div class="candidate-title"><h2>B · 文档折角 B</h2><span class="candidate-code">DOCUMENT</span></div><p>两个文档负形组成 B，下半部只保留一个折角，表达招标文件被结构化理解，同时避免使用普通文件图标。</p><ul><li>产品语义最直接</li><li>几何最平稳</li><li>小尺寸轮廓最规整</li></ul><button class="select-logo" type="button" data-choice="B" aria-pressed="false">选择 Logo B</button></div></article>
+      <article class="candidate"><img class="lockup" src="logo-c-precision-engine.png" width="1254" height="1254" alt="Logo C，前倾精准引擎感的金色 B 与 BidEngine 文字"><div class="candidate-body"><div class="candidate-title"><h2>C · 精准引擎 B</h2><span class="candidate-code">PRECISION</span></div><p>前倾主轴与校准切口构成更有速度感的 B，强调“标擎”的工程效率与评审精度，不使用靶心或勾选符号。</p><ul><li>动势与科技感最强</li><li>与现有 B 保持家族关系</li><li>适合侧栏独立图标</li></ul><button class="select-logo" type="button" data-choice="C" aria-pressed="false">选择 Logo C</button></div></article>
+    </section>
+
+    <section class="scale-section"><h2>小尺寸识别测试</h2><p>下列尺寸按 CSS 像素原样展示；16px 是浏览器 tab 的关键门槛。</p><div class="scale-grid">
+      <article class="scale-card"><h3>A · 精修当前标志</h3><div class="scale-surface" data-surface="dark"><div class="sample"><img class="s128" src="logo-a-mark.png" alt=""><span>128</span></div><div class="sample"><img class="s64" src="logo-a-mark.png" alt=""><span>64</span></div><div class="sample"><img class="s32" src="logo-a-mark.png" alt=""><span>32</span></div><div class="sample"><img class="s16" src="logo-a-mark.png" alt=""><span>16</span></div></div><div class="scale-surface"><div class="sample"><img class="s64" src="logo-a-mark.png" alt=""><span>light · 64</span></div><div class="sample"><img class="s32" src="logo-a-mark.png" alt=""><span>light · 32</span></div><div class="sample"><img class="s16" src="logo-a-mark.png" alt=""><span>light · 16</span></div></div></article>
+      <article class="scale-card"><h3>B · 文档折角 B</h3><div class="scale-surface" data-surface="dark"><div class="sample"><img class="s128" src="logo-b-mark.png" alt=""><span>128</span></div><div class="sample"><img class="s64" src="logo-b-mark.png" alt=""><span>64</span></div><div class="sample"><img class="s32" src="logo-b-mark.png" alt=""><span>32</span></div><div class="sample"><img class="s16" src="logo-b-mark.png" alt=""><span>16</span></div></div><div class="scale-surface"><div class="sample"><img class="s64" src="logo-b-mark.png" alt=""><span>light · 64</span></div><div class="sample"><img class="s32" src="logo-b-mark.png" alt=""><span>light · 32</span></div><div class="sample"><img class="s16" src="logo-b-mark.png" alt=""><span>light · 16</span></div></div></article>
+      <article class="scale-card"><h3>C · 精准引擎 B</h3><div class="scale-surface" data-surface="dark"><div class="sample"><img class="s128" src="logo-c-mark.png" alt=""><span>128</span></div><div class="sample"><img class="s64" src="logo-c-mark.png" alt=""><span>64</span></div><div class="sample"><img class="s32" src="logo-c-mark.png" alt=""><span>32</span></div><div class="sample"><img class="s16" src="logo-c-mark.png" alt=""><span>16</span></div></div><div class="scale-surface"><div class="sample"><img class="s64" src="logo-c-mark.png" alt=""><span>light · 64</span></div><div class="sample"><img class="s32" src="logo-c-mark.png" alt=""><span>light · 32</span></div><div class="sample"><img class="s16" src="logo-c-mark.png" alt=""><span>light · 16</span></div></div></article>
+    </div><div class="note"><strong>生产导出策略：</strong>你选定后才会生成 favicon、Apple Touch Icon 和侧栏专用尺寸，并覆盖现有 `bid-engine-logo.ico`。原型阶段不会修改生产资源。</div></section>
+  </main>
+  <div class="demo-status" id="demoStatus" role="status" aria-live="polite"></div>
+  <script>
+    const status = document.querySelector('#demoStatus'); let timer;
+    const announce = (message) => { status.textContent = message; status.dataset.open = 'true'; clearTimeout(timer); timer = setTimeout(() => { status.dataset.open = 'false'; }, 2600); };
+    document.querySelectorAll('[data-choice]').forEach((button) => button.addEventListener('click', () => { document.querySelectorAll('[data-choice]').forEach((item) => item.setAttribute('aria-pressed','false')); button.setAttribute('aria-pressed','true'); announce(`已在本地预览中标记 Logo ${button.dataset.choice}；请在对话中告诉我最终选择。`); }));
+  </script>
+</body>
+</html>

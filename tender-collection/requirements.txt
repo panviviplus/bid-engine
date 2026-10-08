@@ -1,0 +1,13 @@
+# 招标情报采集服务依赖（tender-collection）
+#
+# 说明：使用带上界的版本区间而非精确锁定，便于安全更新；
+# 部署镜像时由 Docker 构建固定实际版本（Dockerfile 中安装后可用 pip freeze 归档）。
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+pydantic>=2.8,<3.0
+httpx>=0.27,<1.0
+playwright>=1.47,<2.0
+trafilatura>=1.12,<2.0
+readability-lxml>=0.8.1,<1.0
+beautifulsoup4>=4.12,<5.0
+lxml>=5.2,<6.0

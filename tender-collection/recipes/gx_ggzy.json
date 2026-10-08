@@ -1,0 +1,14 @@
+{
+  "sourceKey": "gx_ggzy",
+  "name": "广西壮族自治区公共资源交易平台",
+  "homepage": "http://ggzy.jgswj.gxzf.gov.cn/",
+  "category": "地方级",
+  "region": "广西壮族自治区",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["http://ggzy.jgswj.gxzf.gov.cn/"],
+  "linkPattern": "projectDetails\\.html",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "全国公共资源交易平台（广西）首页滚动招标公告，详情页统一为 projectDetails.html?infoid=...。"
+}

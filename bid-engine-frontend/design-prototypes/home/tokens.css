@@ -1,0 +1,69 @@
+/* Hallmark · prototype tokens · genre: modern-minimal · theme: BidEngine deep-sea/gold */
+:root {
+  --color-canvas: oklch(96% 0.009 240);
+  --color-paper: oklch(98.5% 0.005 240);
+  --color-paper-2: oklch(94.5% 0.012 240);
+  --color-paper-3: oklch(91.5% 0.018 240);
+  --color-control: oklch(20% 0.035 245);
+  --color-control-raised: oklch(27% 0.045 245);
+  --color-ink: oklch(22% 0.026 245);
+  --color-ink-2: oklch(34% 0.026 245);
+  --color-muted: oklch(50% 0.025 245);
+  --color-rule: oklch(87% 0.015 240);
+  --color-primary: oklch(42% 0.09 255);
+  --color-primary-soft: oklch(92% 0.035 255);
+  --color-accent: oklch(75% 0.14 83);
+  --color-accent-soft: oklch(94% 0.035 83);
+  --color-accent-ink: oklch(20% 0.035 245);
+  --color-focus: oklch(55% 0.16 75);
+  --color-success: oklch(45% 0.13 158);
+  --color-success-soft: oklch(94% 0.035 158);
+  --color-warning: oklch(47% 0.15 65);
+  --color-warning-soft: oklch(95% 0.04 75);
+  --color-error: oklch(50% 0.19 28);
+  --color-error-soft: oklch(95% 0.035 28);
+  --color-white-alpha-65: oklch(96% 0.008 240 / 0.65);
+  --color-white-alpha-82: oklch(98% 0.006 240 / 0.82);
+  --color-shadow: oklch(15% 0.03 245 / 0.08);
+
+  --font-display: "Avenir Next", "PingFang SC", sans-serif;
+  --font-body: "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-outlier: "SFMono-Regular", "Menlo", monospace;
+
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5625rem;
+  --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+  --text-display: clamp(2rem, 3.8vw, 3.8rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+  --rule: 1px solid var(--color-rule);
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-tooltip: 600;
+}

@@ -1,0 +1,85 @@
+{
+  "root": true,
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "ecmaVersion": 2020,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:react-hooks/recommended",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/prettier",
+    "next"
+  ],
+  "plugins": [
+    "react-hooks"
+  ],
+  "rules": {
+    "react/jsx-no-bind": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "no-console": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "react/forbid-prop-types": "off",
+    "import/prefer-default-export": "off",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "spaced-comment": "off",
+    "guard-for-in": "off",
+    "react/no-danger": "off",
+    "react/button-has-type": "off",
+    "react/no-unescaped-entities": "off",
+    "operator-assignment": "off",
+    "prefer-destructuring": "off",
+    "react/no-children-prop": "off",
+    "consistent-return": "off",
+    "react/state-in-constructor": "off",
+    "no-restricted-syntax": "off",
+    "no-continue": "off",
+    "react/destructuring-assignment": "off",
+    "@typescript-eslint/dot-notation": "off",
+    "no-bitwise": "off",
+    "no-redeclare": "off",
+    "@typescript-eslint/naming-convention": "off",
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "no-alert": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-array-index-key": "off",
+    "react/require-default-props": "off",
+    "react/sort-prop-types": "error",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "import/no-named-as-default": "off",
+    "import/extensions": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".tsx"
+        ]
+      }
+    ]
+  },
+  "globals": {
+    "globalThis": "readonly"
+  }
+}

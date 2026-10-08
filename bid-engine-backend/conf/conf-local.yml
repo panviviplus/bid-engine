@@ -1,0 +1,156 @@
+env: local
+
+server:
+  app_name: bid-engine
+  bin_path: /service
+  http_port: 1022
+
+log:
+  log_dir: ./logs
+  log_level: debug
+  max_size: 100
+  max_backups: 20
+  max_age: 7
+
+mysql:
+  dsn: root:root@tcp(127.0.0.1:3306)/smart-bid?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+# === Redis 配置（env=local 时自动连接本地；其他环境走下方 host/auth）===
+redis:
+  host: 127.0.0.1:6379   # 本地默认；远程部署时改为实际地址
+  auth:                   # 本地无密码；远程部署时填入密码
+
+# ===== 招标解析 V3 并发与输入预算 =====
+bid_analysis_v3:
+  docling_concurrency: 2
+  llm_concurrency: 8             # 整个后端进程共享的 LLM 并发硬上限（不是单项目上限）
+  llm_input_chunk_ceiling: 120000 # 单次 LLM 请求输入分块上限（tokens）
+  chunk_split_bytes: 1048576   # 单块 PDF 超过该字节数时递归二分（默认 1MB：10 页块过大时拆为 5 页左右）
+
+# ===== 标书审核 V2 并发与输出预算 =====
+bid_review:
+  llm_concurrency: 4              # 审核链路 LLM 并发（逐条深核 + 批量判定共享）
+  max_output_ceiling: 16384       # 单次 LLM 输出上限硬顶；即便模型配置写了 900000 也会回落到该值
+  retrieval_top_k: 8              # 单个清单项召回候选页数量
+  chunk_chars: 1800               # 投标文件分块长度（字符）
+  chunk_overlap_chars: 200        # 分块重叠长度（避免跨块切断语义）
+
+# ===== 任务队列配置（Redis 消费队列，每模块独立）=====
+task_queues:
+  tender_parse_v3:
+    name: "招标解析V3"
+    concurrency: 2
+    max_attempts: 1
+    visibility_sec: 10800    # 3h 租约（全文分块解析，lease 心跳每 30s 续期）
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  tender_blueprint_v3:
+    name: "标书蓝图V3"
+    concurrency: 2
+    max_attempts: 3
+    visibility_sec: 3600
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  material_parse:
+    name: "素材库解析"
+    concurrency: 3           # 素材解析轻量，可并发 3 个
+    max_attempts: 3
+    visibility_sec: 1800     # 30min 租约
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  bid_gen_parse:
+    name: "标书生成解析"
+    concurrency: 2
+    max_attempts: 3
+    visibility_sec: 7200     # 2h 租约（复用招标解析管线，耗时较长）
+    retry_backoff_sec: 30
+  bid_gen_generate:
+    name: "标书正文生成"
+    concurrency: 20
+    max_attempts: 3
+    visibility_sec: 21600
+    retry_backoff_sec: 15
+    poll_interval_sec: 1
+  bid_review:
+    name: "投标书审核"
+    concurrency: 2
+    max_attempts: 3
+    visibility_sec: 10800    # 3h 租约（招/投多文件解析+多轮LLM检查）
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  tender_intel_collect:
+    name: "招标情报采集"
+    concurrency: 3           # 采集是网络等待型，可多源并发
+    max_attempts: 2
+    visibility_sec: 900      # 15min 租约（单源发现+抽取）
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  tender_intel_enrich:
+    name: "招标情报打标"
+    concurrency: 2           # 打标会批量调用全局模型，控制并发避免挤占其他模块额度
+    max_attempts: 2
+    visibility_sec: 3600
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+  tender_intel_match:
+    name: "招标情报订阅匹配"
+    concurrency: 2           # 内存比对 + 批量写提醒，与采集/打标互不阻塞
+    max_attempts: 3
+    visibility_sec: 1800
+    retry_backoff_sec: 30
+    poll_interval_sec: 5
+
+# ===== 招标情报站 =====
+tender_intel:
+  # 独立采集服务（tender-collection）地址；容器化部署时改为主机可达地址
+  collector_base_url: http://127.0.0.1:5011
+  # 自动采集节奏存放于 tender_intel_collect_schedule 表，由“系统管理 → 招标情报管理 → 采集任务配置”维护
+  # （默认每天 06:00，保存后热生效，无需重启后端）
+
+# ===== 标书正文生成并发与事件流 =====
+bid_generation:
+  default_user_concurrency: 10
+  user_slot_lease_sec: 90
+  event_stream_max_len: 4096
+  event_ttl_sec: 86400
+  sse_heartbeat_sec: 15
+
+# ===== MinIO 本地对象存储 =====
+minio:
+  endpoint: 127.0.0.1:9000
+  access_key: admin
+  secret_key: admin123456
+  default_bucket: smart-bid
+  cdn_bucket: smart-bid-cdn
+  use_ssl: false
+
+# ===== 第三方对象存储（当前未使用）=====
+# 标擎使用本地 MinIO（见上方 minio 段），不依赖腾讯云 COS 等第三方 OSS。
+# 如需接入 COS：在下方补回 cos 列表（name / raw_url / secret_id / secret_key），
+# 并把 properties.oss_type 改为 cos。请勿把真实密钥提交到仓库。
+
+properties:
+  pdf_base_url: http://10.19.2.100:31880
+  pdf_app_id: saas_document_writing
+  pdf_app_secret:
+  pdf_image_url: http://pdf-web.pdf-test
+  api_base_url: http://localhost:1022
+  oss_type: minio
+  oss_base: bid-engine
+  oss_name: default
+  deploy_type: local
+  tender_field_batch_size: 10    # LLM 批量字段提取每批数量
+  docling_timeout_sec: 660       # Docling 同步解析客户端超时（服务端 max_sync_wait=600 + 余量）
+
+  # Docling 文档解析服务（开源，替代私有 PDF 服务）
+  # 本地开发: http://localhost:5001
+  # 云端部署: https://docling-api.your-domain.com
+  docling_base_url: http://127.0.0.1:5002
+  # 文档转换服务（独立部署的 doc/docx → PDF 依赖服务）
+  converter_base_url: http://127.0.0.1:5010
+  converter_timeout_sec: 300
+  cookie_domain:
+  cookie_name: bid-engine-authorization
+  es_index_pre: bidhub- # es索引前缀
+  # OpenAPI 调用令牌（/openapi/* 路由鉴权用）；留空表示关闭 OpenAPI 访问
+  openapi_token:

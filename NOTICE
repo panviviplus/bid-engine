@@ -1,0 +1,41 @@
+标擎 BidEngine 许可与第三方组件声明
+=================================
+
+1. 项目代码
+
+本仓库代码（不含第三方组件）由 panviviplus 提供，按 PolyForm Noncommercial
+License 1.0.0 授权，仅允许非商业用途。完整条款见 ./LICENSE。
+
+个人学习、研究、实验、私有部署，以及慈善组织、教育机构、公共研究组织、
+公共安全或健康组织、环保组织、政府机构的非商业使用，均属于许可范围。
+任何商业用途（包括但不限于对外提供收费服务、集成进商业产品、企业内部
+经营性使用）都需要事先获得书面授权：https://github.com/panviviplus
+
+2. 名称与视觉素材
+
+“标擎”“BidEngine”名称、Logo 及 images/ 等视觉素材不随代码一并授权，
+保留所有权利。不得在与本项目无关的场景下使用，也不得暗示任何官方关联
+或背书。
+
+3. 第三方组件
+
+本仓库包含或依赖以下第三方作品，其权利归各自所有者，遵循各自的许可证：
+
+- bid-engine-backend/lib/common/xls —— 内嵌的 xls/xlsx 读写库，Apache License
+  2.0，原始许可证全文见 bid-engine-backend/lib/common/xls/LICENSE。
+- Go 依赖（bid-engine-backend/go.mod、go.sum 中列出的模块）—— 各自遵循其
+  上游许可证，包括 MIT、BSD-3-Clause、Apache-2.0 等。
+- 前端依赖（bid-engine-frontend/package.json、package-lock.json 中列出的包）
+  —— 各自遵循其上游许可证。
+- tender-collection 的 Python 依赖（tender-collection/requirements.txt）—— 各自
+  遵循其上游许可证。
+
+第三方许可证的宽松条款（如 MIT、Apache-2.0）与本项目自身的非商业限制作
+用范围相互独立：本项目的许可限制不改变、也不额外限制第三方组件原有的
+使用条件。
+
+4. 免责声明
+
+本软件按“现状”提供，不附带任何明示或默示的担保。项目用于招投标场景时，
+AI 生成的解析结果、审核结论与文本内容仅供参考，不构成法律、合规或专业
+建议，使用前请自行核验。使用者对基于本软件做出的任何决策及其后果负责。

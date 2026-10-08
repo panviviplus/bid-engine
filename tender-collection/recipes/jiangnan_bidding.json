@@ -1,0 +1,13 @@
+{
+  "sourceKey": "jiangnan_bidding",
+  "name": "江南大学招标采购",
+  "homepage": "https://bidding.jiangnan.edu.cn/",
+  "category": "高校",
+  "region": "江苏省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://bidding.jiangnan.edu.cn/sfw_cms/e?page=cms.psms.gglist&typeDetail=YXGK&categoryId=4802"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "高校采购样板源；公告列表由 CMS 脚本渲染"
+}

@@ -1,0 +1,14 @@
+{
+  "sourceKey": "xj_ggzy",
+  "name": "新疆公共资源交易网",
+  "homepage": "https://ggzy.xinjiang.gov.cn/",
+  "category": "地方级",
+  "region": "新疆维吾尔自治区",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzy.xinjiang.gov.cn/xinjiangggzy_new/jyxx/trade_info.html"],
+  "linkPattern": "/jyxx/\\d{6}/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "交易信息栏目；详情页形如 /xinjiangggzy_new/jyxx/{大类}/{子类}/{日期}/{id}.html。"
+}

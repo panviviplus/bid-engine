@@ -1,0 +1,14 @@
+{
+  "sourceKey": "hubei_ggzy",
+  "name": "湖北省公共资源交易平台",
+  "homepage": "https://jycg.hubei.gov.cn/",
+  "category": "地方级",
+  "region": "湖北省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://jycg.hubei.gov.cn/jyxx/"],
+  "linkPattern": "hbbidcloud\\.cn/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "湖北省公共资源交易中心“交易信息”栏目；窗口站会对静态请求返回 412 挑战页，必须走无头浏览器；列表项指向省级电子交易系统 www.hbbidcloud.cn 的详情页，用 linkPattern 收窄。"
+}

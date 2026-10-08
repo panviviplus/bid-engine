@@ -1,0 +1,13 @@
+{
+  "sourceKey": "sc_ggzy",
+  "name": "四川省公共资源交易信息网",
+  "homepage": "https://ggzyjy.sc.gov.cn/",
+  "category": "地方级",
+  "region": "四川省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzyjy.sc.gov.cn/jyxx/002001/transactionInfo.html"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "交易信息栏目，列表异步加载"
+}

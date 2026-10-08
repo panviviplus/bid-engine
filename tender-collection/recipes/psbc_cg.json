@@ -1,0 +1,13 @@
+{
+  "sourceKey": "psbc_cg",
+  "name": "中国邮政储蓄银行采购平台",
+  "homepage": "https://cg.11185.cn/",
+  "category": "银行",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://cg.11185.cn/zgyzcms/category/bulletinList.html?dates=300&categoryId=88&page=1"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "categoryId=88 为招标信息栏目；列表异步加载"
+}

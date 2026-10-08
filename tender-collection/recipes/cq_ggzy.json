@@ -1,0 +1,14 @@
+{
+  "sourceKey": "cq_ggzy",
+  "name": "重庆市公共资源交易网",
+  "homepage": "https://www.cqggzy.com/",
+  "category": "地方级",
+  "region": "重庆市",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.cqggzy.com/trade/014002?categoryNum=014002001"],
+  "linkPattern": "/trade/\\d{6}/\\d+(\\?|$)",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "交易公告列表；详情页形如 /trade/{栏目}/{id}?categoryNum=...，与栏目页 /trade/{栏目}?categoryNum=... 用“多一段数字路径”区分。"
+}

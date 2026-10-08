@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>标擎首页原型 A · 任务指挥台</title>
+  <style>
+    /* Hallmark · macrostructure: Workbench · genre: modern-minimal · theme: BidEngine deep-sea/gold · enrichment: none · contrast: pass (40–41) · mobile: pass (34, 49, 50–57) · slop: 58/58 */
+    /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 */
+    :root {
+      --color-canvas: oklch(96% 0.009 240); --color-paper: oklch(98.5% 0.005 240);
+      --color-paper-2: oklch(94.5% 0.012 240); --color-control: oklch(20% 0.035 245);
+      --color-control-raised: oklch(27% 0.045 245); --color-ink: oklch(22% 0.026 245);
+      --color-ink-2: oklch(34% 0.026 245); --color-muted: oklch(50% 0.025 245);
+      --color-rule: oklch(87% 0.015 240); --color-primary: oklch(42% 0.09 255);
+      --color-primary-soft: oklch(92% 0.035 255); --color-accent: oklch(75% 0.14 83);
+      --color-accent-soft: oklch(94% 0.035 83); --color-accent-ink: oklch(20% 0.035 245);
+      --color-focus: oklch(55% 0.16 75); --color-success: oklch(45% 0.13 158);
+      --color-success-soft: oklch(94% 0.035 158); --color-warning: oklch(47% 0.15 65);
+      --color-warning-soft: oklch(95% 0.04 75); --color-error: oklch(50% 0.19 28);
+      --color-error-soft: oklch(95% 0.035 28); --color-shadow: oklch(15% 0.03 245 / 0.08);
+      --color-side-text: oklch(91% 0.012 240); --color-side-muted: oklch(72% 0.018 240);
+      --font-display: "Avenir Next", "PingFang SC", sans-serif;
+      --font-body: "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-outlier: "SFMono-Regular", "Menlo", monospace;
+      --space-2xs: .25rem; --space-xs: .5rem; --space-sm: .75rem; --space-md: 1rem; --space-lg: 1.5rem;
+      --space-xl: 2.5rem; --space-2xl: 4rem; --text-xs: .75rem; --text-sm: .875rem;
+      --text-base: 1rem; --text-md: 1.25rem; --text-lg: 1.5625rem; --text-xl: 1.953rem;
+      --text-display: clamp(2rem, 3.8vw, 3.75rem); --radius-sm: .5rem; --radius-md: .75rem;
+      --radius-card: 1rem; --radius-pill: 999px; --ease-out: cubic-bezier(.16,1,.3,1);
+      --ease-in: cubic-bezier(.7,0,.84,0); --dur-micro: 120ms; --dur-short: 220ms;
+      --z-sticky: 200; --z-tooltip: 600;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; overflow-x: clip; }
+    body { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-base); line-height: 1.55; }
+    button, a { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    :focus { outline: none; }
+    :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .app { display: grid; grid-template-columns: 15rem minmax(0, 1fr); min-height: 100dvh; }
+    .app[data-collapsed="true"] { grid-template-columns: 4rem minmax(0, 1fr); }
+    .sidebar { position: sticky; top: 0; height: 100dvh; background: var(--color-control); color: var(--color-side-text); display: flex; flex-direction: column; min-width: 0; z-index: var(--z-sticky); }
+    .brand-row { min-height: 4.5rem; display: flex; align-items: center; gap: var(--space-sm); padding-inline: var(--space-md); border-bottom: 1px solid var(--color-control-raised); }
+    .brand { min-height: 44px; min-width: 0; display: flex; align-items: center; gap: var(--space-sm); border-radius: var(--radius-md); padding: var(--space-xs); }
+    .brand img { width: 2.25rem; height: 2.25rem; border-radius: .45rem; object-fit: cover; flex: 0 0 auto; }
+    .brand strong { font-family: var(--font-display); font-size: var(--text-md); letter-spacing: -.025em; white-space: nowrap; }
+    .rail-toggle { width: 100%; min-width: 0; min-height: 44px; display: flex; align-items: center; justify-content: flex-start; gap: var(--space-sm); padding-inline: var(--space-sm); border: 1px solid transparent; border-radius: var(--radius-md); background: transparent; color: var(--color-side-muted); cursor: pointer; white-space: nowrap; transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out); }
+    .rail-toggle:active { transform: translateY(1px); }
+    .toggle-icon { width: 1.75rem; display: grid; place-items: center; flex: 0 0 auto; transition: transform var(--dur-short) var(--ease-out); }
+    .app[data-collapsed="true"] .rail-toggle { justify-content: center; padding-inline: var(--space-2xs); }
+    .app[data-collapsed="true"] .toggle-icon { transform: rotate(180deg); }
+    .app[data-collapsed="true"] .toggle-label { display: none; }
+    .app[data-collapsed="true"] .brand-row { justify-content: center; padding-inline: var(--space-xs); }
+    .app[data-collapsed="true"] .brand strong, .app[data-collapsed="true"] .nav-label, .app[data-collapsed="true"] .sidebar-foot span { display: none; }
+    .nav { display: grid; gap: var(--space-xs); padding: var(--space-md) var(--space-sm); }
+    .nav a { min-height: 44px; display: flex; align-items: center; gap: var(--space-sm); border-radius: var(--radius-md); padding-inline: var(--space-sm); color: var(--color-side-muted); white-space: nowrap; transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+    .nav a[data-active="true"] { background: var(--color-primary); color: var(--color-side-text); }
+    .nav a[data-active="true"] .nav-code { color: var(--color-paper); }
+    .nav a:active { transform: translateY(1px); }
+    .nav-code { width: 1.75rem; font-family: var(--font-body); font-size: var(--text-xs); color: var(--color-accent); text-align: center; flex: 0 0 auto; }
+    .sidebar-foot { margin-top: auto; min-height: 4.5rem; display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md); border-top: 1px solid var(--color-control-raised); color: var(--color-side-muted); }
+    .avatar { width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: var(--radius-pill); background: var(--color-control-raised); color: var(--color-accent); font-family: var(--font-body); }
+    main { min-width: 0; }
+    .page { width: min(100%, 96rem); margin-inline: auto; padding: clamp(1rem, 3vw, 3rem); }
+    .hero { display: grid; gap: var(--space-xl); padding-block: var(--space-lg) var(--space-xl); }
+    .hero-copy h1 { min-width: 0; margin: 0; max-width: 18ch; font-family: var(--font-display); font-size: var(--text-display); line-height: 1.08; letter-spacing: -.04em; overflow-wrap: anywhere; }
+    .hero-copy p { margin: var(--space-sm) 0 0; max-width: 60ch; color: var(--color-muted); }
+    .toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-sm); }
+    .period { display: inline-flex; flex-wrap: wrap; gap: var(--space-2xs); padding: var(--space-2xs); border: 1px solid var(--color-rule); border-radius: var(--radius-pill); background: var(--color-paper); }
+    .period button { min-height: 44px; padding-inline: var(--space-md); border: 0; border-radius: var(--radius-pill); background: transparent; cursor: pointer; white-space: nowrap; transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+    .period button[aria-pressed="true"] { background: var(--color-control); color: var(--color-paper); }
+    .period button:active { transform: translateY(1px); }
+    .config-alert { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-md) var(--space-lg); border: 1px solid var(--color-warning); border-radius: var(--radius-card); background: var(--color-warning-soft); color: var(--color-ink); }
+    .config-alert strong { display: block; font-family: var(--font-display); }
+    .config-alert span { color: var(--color-ink-2); font-size: var(--text-sm); }
+    .config-alert a { min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; font-weight: 700; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-md); margin-block: var(--space-xl) var(--space-md); }
+    .section-head h2 { margin: 0; font-family: var(--font-display); font-size: var(--text-lg); letter-spacing: -.025em; }
+    .section-head p { margin: 0; color: var(--color-muted); font-size: var(--text-sm); }
+    .module-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-md); }
+    .module { min-width: 0; min-height: 15rem; padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); display: flex; flex-direction: column; position: relative; transition: border-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+    .module:active { transform: translateY(1px); }
+    .module[data-tone="dark"] { background: var(--color-control); color: var(--color-paper); border-color: var(--color-control); }
+    .module[data-tone="dark"] .module-slogan, .module[data-tone="dark"] .metric-label { color: var(--color-side-muted); }
+    .module-analysis, .module-material { grid-column: span 7; }
+    .module-generation, .module-review { grid-column: span 5; }
+    .module-top { display: flex; align-items: start; justify-content: space-between; gap: var(--space-md); }
+    .module h3 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); letter-spacing: -.035em; }
+    .module-arrow { width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--radius-pill); border: 1px solid currentColor; flex: 0 0 auto; }
+    .module-slogan { max-width: 48ch; margin: var(--space-md) 0 var(--space-lg); color: var(--color-muted); font-size: var(--text-sm); }
+    .module-bottom { margin-top: auto; display: flex; align-items: end; justify-content: space-between; gap: var(--space-md); }
+    .metric { font-family: var(--font-outlier); font-size: var(--text-2xl); font-variant-numeric: tabular-nums; line-height: 1; }
+    .metric-label { display: block; margin-top: var(--space-xs); color: var(--color-muted); font-family: var(--font-body); font-size: var(--text-xs); }
+    .material-links { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+    .material-links a { min-height: 44px; display: inline-flex; align-items: center; padding-inline: var(--space-sm); border: 1px solid var(--color-rule); border-radius: var(--radius-pill); white-space: nowrap; font-size: var(--text-sm); }
+    .lower-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(18rem, .8fr); gap: var(--space-lg); margin-top: var(--space-lg); }
+    .surface { min-width: 0; padding: var(--space-lg); border: 1px solid var(--color-rule); border-radius: var(--radius-card); background: var(--color-paper); }
+    .surface h2 { margin: 0 0 var(--space-md); font-family: var(--font-display); font-size: var(--text-lg); }
+    .work-list, .attention-list { display: grid; gap: var(--space-2xs); }
+    .work-row, .attention-row { min-height: 4.5rem; display: grid; align-items: center; gap: var(--space-md); border-radius: var(--radius-md); padding: var(--space-sm); transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+    .work-row { grid-template-columns: auto minmax(0, 1fr) auto; }
+    .attention-row { grid-template-columns: auto minmax(0, 1fr); }
+    .work-row:active, .attention-row:active { transform: translateY(1px); }
+    .work-code { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: var(--radius-md); background: var(--color-primary-soft); color: var(--color-primary); font-family: var(--font-body); font-size: var(--text-xs); }
+    .work-title { min-width: 0; }
+    .work-title strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .work-title span { color: var(--color-muted); font-size: var(--text-xs); }
+    .state { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 2rem; padding-inline: var(--space-sm); border-radius: var(--radius-pill); font-size: var(--text-xs); white-space: nowrap; }
+    .state::before { content: ""; width: .45rem; height: .45rem; border-radius: var(--radius-pill); background: currentColor; }
+    .state-running { color: var(--color-primary); background: var(--color-primary-soft); }
+    .state-action { color: var(--color-warning); background: var(--color-warning-soft); }
+    .state-risk { color: var(--color-error); background: var(--color-error-soft); }
+    .attention-copy strong { display: block; }
+    .attention-copy span { color: var(--color-muted); font-size: var(--text-xs); }
+    .demo-status { position: fixed; right: var(--space-md); bottom: var(--space-md); max-width: min(26rem, calc(100% - 2rem)); padding: var(--space-sm) var(--space-md); border-radius: var(--radius-pill); background: var(--color-control); color: var(--color-paper); font-size: var(--text-sm); opacity: 0; transform: translateY(.5rem); pointer-events: none; z-index: var(--z-tooltip); transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out); }
+    .demo-status[data-open="true"] { opacity: 1; transform: none; }
+    button:disabled, [aria-disabled="true"] { opacity: .5; cursor: not-allowed; pointer-events: none; }
+    [data-state="loading"] { cursor: wait; opacity: .7; }
+    [data-state="error"] { border-color: var(--color-error) !important; }
+    [data-state="success"] { border-color: var(--color-success) !important; }
+    @media (hover: hover) and (pointer: fine) {
+      .brand:hover, .nav a:hover { background: var(--color-control-raised); color: var(--color-side-text); }
+      .rail-toggle:hover { background: var(--color-control-raised); color: var(--color-side-text); border-color: var(--color-control-raised); }
+      .app[data-collapsed="true"] .sidebar:hover .rail-toggle { background: var(--color-accent); color: var(--color-accent-ink); border-color: var(--color-accent); }
+      .module:hover { border-color: var(--color-primary); }
+      .module[data-tone="dark"]:hover { border-color: var(--color-accent); }
+      .work-row:hover, .attention-row:hover { background: var(--color-paper-2); }
+      .material-links a:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    }
+    @media (min-width: 48rem) {
+      .hero { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+      .toolbar { justify-content: end; }
+    }
+    @media (max-width: 59.99rem) {
+      .app { grid-template-columns: 4rem minmax(0, 1fr); }
+      .brand-row { justify-content: center; padding-inline: var(--space-xs); }
+      .brand strong, .nav-label, .sidebar-foot span { display: none; }
+      .module-analysis, .module-material, .module-generation, .module-review { grid-column: span 12; }
+      .lower-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 39.99rem) {
+      .app { grid-template-columns: 3.5rem minmax(0, 1fr); }
+      .brand img { width: 2rem; height: 2rem; }
+      .nav { padding-inline: var(--space-2xs); }
+      .nav a { justify-content: center; padding-inline: var(--space-2xs); }
+      .sidebar-foot { justify-content: center; padding-inline: var(--space-2xs); }
+      .page { padding-inline: var(--space-md); }
+      .hero { padding-top: var(--space-md); gap: var(--space-lg); }
+      .toolbar { align-items: stretch; }
+      .period { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-radius: var(--radius-md); }
+      .period button { padding-inline: var(--space-xs); }
+      .config-alert { align-items: flex-start; flex-direction: column; padding: var(--space-md); }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .module { min-height: 17rem; padding: var(--space-md); }
+      .module h3 { font-size: var(--text-lg); }
+      .module-bottom { align-items: flex-start; flex-direction: column; }
+      .work-row { grid-template-columns: auto minmax(0, 1fr); }
+      .work-row .state { grid-column: 2; justify-self: start; }
+      .surface { padding: var(--space-md); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 150ms !important; transition-duration: 150ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app" id="app" data-collapsed="false">
+    <aside class="sidebar" aria-label="主导航">
+      <div class="brand-row">
+        <a class="brand" href="/" data-route="/" aria-label="返回标擎首页">
+          <img src="../logo/logo-a-mark.png" alt="">
+          <strong>标擎</strong>
+        </a>
+      </div>
+      <nav class="nav">
+        <button class="rail-toggle" id="railToggle" type="button" aria-label="收起侧栏" aria-expanded="true"><span class="toggle-icon">‹</span><span class="toggle-label">收起侧栏</span></button>
+        <a href="/bid-analysis" data-route="/bid-analysis" data-active="true"><span class="nav-code">AN</span><span class="nav-label">招标解析</span></a>
+        <a href="/file-gen" data-route="/file-gen"><span class="nav-code">GN</span><span class="nav-label">投标文件生成</span></a>
+        <a href="/bid-audit" data-route="/bid-audit"><span class="nav-code">RV</span><span class="nav-label">投标文件审核</span></a>
+        <a href="/material/qualification" data-route="/material/qualification"><span class="nav-code">MT</span><span class="nav-label">素材库</span></a>
+        <a href="/system/llm-config" data-route="/system/llm-config"><span class="nav-code">AI</span><span class="nav-label">模型配置</span></a>
+      </nav>
+      <div class="sidebar-foot"><span class="avatar">管</span><span>系统管理员</span></div>
+    </aside>
+
+    <main>
+      <div class="page">
+        <header class="hero">
+          <div class="hero-copy">
+            <h1>晚上好，系统管理员</h1>
+            <p>把解析、写作、审核与素材沉淀放进同一张任务桌面，先看要处理的事，再进入对应模块。</p>
+          </div>
+          <div class="toolbar">
+            <div class="period" role="group" aria-label="统计周期">
+              <button type="button" data-period="today" aria-pressed="false">今日</button>
+              <button type="button" data-period="week" aria-pressed="false">近 7 天</button>
+              <button type="button" data-period="month" aria-pressed="true">本月</button>
+              <button type="button" data-period="year" aria-pressed="false">今年</button>
+            </div>
+          </div>
+        </header>
+
+        <section class="config-alert" aria-label="模型配置提醒">
+          <div><strong>2 个模块尚未配置模型</strong><span>这是配置就绪度提醒，不代表实时服务健康状态。</span></div>
+          <a href="/system/llm-config" data-route="/system/llm-config">检查配置 →</a>
+        </section>
+
+        <div class="section-head"><div><h2>工作模块</h2><p>统计值使用“—”占位，生产版接入个人数据。</p></div><p id="periodLabel">统计周期 · 本月</p></div>
+        <section class="module-grid" aria-label="工作模块">
+          <a class="module module-analysis" data-tone="dark" href="/bid-analysis" data-route="/bid-analysis">
+            <div class="module-top"><h3>招标解析</h3><span class="module-arrow">↗</span></div>
+            <p class="module-slogan">招标文件层层拆解，得分要点与否决红线一目了然，胜算从读懂“考题”开始！</p>
+            <div class="module-bottom"><div><span class="metric">—</span><span class="metric-label" data-period-copy>本月个人项目</span></div><span class="state state-running">原型占位</span></div>
+          </a>
+          <a class="module module-generation" href="/file-gen" data-route="/file-gen">
+            <div class="module-top"><h3>投标文件生成</h3><span class="module-arrow">↗</span></div>
+            <p class="module-slogan">从招标要求到标书正文，目录、素材与表达协同推进，让每一章都紧扣得分目标！</p>
+            <div class="module-bottom"><div><span class="metric">—</span><span class="metric-label" data-period-copy>本月个人项目</span></div><span class="state state-action">待处理 —</span></div>
+          </a>
+          <a class="module module-review" href="/bid-audit" data-route="/bid-audit">
+            <div class="module-top"><h3>投标文件审核</h3><span class="module-arrow">↗</span></div>
+            <p class="module-slogan">对照招标文件逐项核验，遗漏、矛盾与合规风险提前暴露，交付前守住每一道关！</p>
+            <div class="module-bottom"><div><span class="metric">—</span><span class="metric-label" data-period-copy>本月个人项目</span></div><span class="state state-risk">风险 —</span></div>
+          </a>
+          <article class="module module-material">
+            <div class="module-top"><h3>素材库</h3><span class="module-arrow" aria-hidden="true">↗</span></div>
+            <p class="module-slogan">资质、业绩与模板分类沉淀，随用随取、持续复用，让每次投标都站在积累之上！</p>
+            <div class="module-bottom"><div><span class="metric">—</span><span class="metric-label">个人累计素材</span></div><div class="material-links"><a href="/material/qualification" data-route="/material/qualification">资质 —</a><a href="/material/performance" data-route="/material/performance">业绩 —</a><a href="/material/template" data-route="/material/template">模板 —</a></div></div>
+          </article>
+        </section>
+
+        <section class="lower-grid">
+          <div class="surface">
+            <h2>继续工作</h2>
+            <div class="work-list">
+              <a class="work-row" href="/bid-analysis" data-route="/bid-analysis"><span class="work-code">AN</span><span class="work-title"><strong>某市轨道交通设备采购项目</strong><span>原型示例 · 招标解析 · 刚刚更新</span></span><span class="state state-running">运行中</span></a>
+              <a class="work-row" href="/file-gen/preview" data-route="/file-gen/[id]"><span class="work-code">GN</span><span class="work-title"><strong>园区机电改造投标文件</strong><span>原型示例 · 投标文件生成 · 今天更新</span></span><span class="state state-action">待确认大纲</span></a>
+              <a class="work-row" href="/bid-audit/preview" data-route="/bid-audit/[id]"><span class="work-code">RV</span><span class="work-title"><strong>医疗设备采购响应文件</strong><span>原型示例 · 投标文件审核 · 昨天更新</span></span><span class="state state-risk">需整改</span></a>
+            </div>
+          </div>
+          <div class="surface">
+            <h2>待关注</h2>
+            <div class="attention-list">
+              <a class="attention-row" href="/bid-audit" data-route="/bid-audit"><span class="state state-risk">风险</span><span class="attention-copy"><strong>审核发现高风险项</strong><span>原型示例 · 查看检查结果</span></span></a>
+              <a class="attention-row" href="/bid-analysis" data-route="/bid-analysis"><span class="state state-action">操作</span><span class="attention-copy"><strong>解析任务已暂停</strong><span>原型示例 · 继续或终止任务</span></span></a>
+              <a class="attention-row" href="/file-gen" data-route="/file-gen"><span class="state state-running">运行</span><span class="attention-copy"><strong>标书章节正在生成</strong><span>原型示例 · 查看处理进度</span></span></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="demo-status" id="demoStatus" role="status" aria-live="polite"></div>
+  <script>
+    const app = document.querySelector('#app');
+    const toggle = document.querySelector('#railToggle');
+    const status = document.querySelector('#demoStatus');
+    let statusTimer;
+    const announce = (message) => {
+      status.textContent = message;
+      status.dataset.open = 'true';
+      window.clearTimeout(statusTimer);
+      statusTimer = window.setTimeout(() => { status.dataset.open = 'false'; }, 2200);
+    };
+    toggle.addEventListener('click', () => {
+      const collapsed = app.dataset.collapsed !== 'true';
+      app.dataset.collapsed = String(collapsed);
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      toggle.setAttribute('aria-label', collapsed ? '展开侧栏' : '收起侧栏');
+      announce(collapsed ? '侧栏已收起，Logo 仍可返回首页' : '侧栏已展开');
+    });
+    document.querySelectorAll('[data-period]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-period]').forEach((item) => item.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        const labels = { today: '今日', week: '近 7 天', month: '本月', year: '今年' };
+        document.querySelector('#periodLabel').textContent = `统计周期 · ${labels[button.dataset.period]}`;
+        document.querySelectorAll('[data-period-copy]').forEach((item) => { item.textContent = `${labels[button.dataset.period]}个人项目`; });
+        announce(`原型已切换到${labels[button.dataset.period]}，生产版将重新请求统计接口`);
+      });
+    });
+    document.querySelectorAll('[data-route]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        announce(`生产路由：${link.dataset.route}`);
+      });
+    });
+    if (window.matchMedia('(max-width: 59.99rem)').matches) {
+      app.dataset.collapsed = 'true';
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', '展开侧栏');
+    }
+  </script>
+</body>
+</html>

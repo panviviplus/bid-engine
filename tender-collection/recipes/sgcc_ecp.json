@@ -1,0 +1,13 @@
+{
+  "sourceKey": "sgcc_ecp",
+  "name": "国家电网电子商务平台",
+  "homepage": "https://ecp.sgcc.com.cn/",
+  "category": "国央企",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ecp.sgcc.com.cn/ecp2.0/portal/"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "单页应用（#/list/...），必须浏览器渲染"
+}

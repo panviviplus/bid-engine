@@ -1,0 +1,16 @@
+{
+  "sourceKey": "ccgp_central",
+  "name": "中国政府采购网·中央公告",
+  "homepage": "http://www.ccgp.gov.cn/",
+  "category": "国家级",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": false,
+  "listUrls": ["http://www.ccgp.gov.cn/cggg/zygg/"],
+  "linkPattern": "/cggg/zygg/[a-z0-9]+/\\d{6}/t\\d{8}_\\d+\\.htm",
+  "contentSelectors": [".vF_detail_content", "#content", ".vT_detail_main"],
+  "titleSelectors": [".vT_detail_header", "h1", "title"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "静态列表页已验证可直接取到详情链接（相对路径 ./gkzb/202609/t2026xxxx_xxxxx.htm）；linkPattern 限定在 /cggg/zygg/ 采购公告目录内，避免把导航里的政策动态、购买服务资讯当成公告"
+}

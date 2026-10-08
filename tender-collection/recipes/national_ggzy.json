@@ -1,0 +1,13 @@
+{
+  "sourceKey": "national_ggzy",
+  "name": "全国公共资源交易平台",
+  "homepage": "https://www.ggzy.gov.cn/",
+  "category": "国家级",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.ggzy.gov.cn/deal/dealList.html"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "全国汇总平台，覆盖度最高；列表为脚本渲染"
+}

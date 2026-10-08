@@ -1,0 +1,14 @@
+{
+  "sourceKey": "tj_ggzy",
+  "name": "天津市公共资源交易平台",
+  "homepage": "https://ggzy.zwfwb.tj.gov.cn/",
+  "category": "地方级",
+  "region": "天津市",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzy.zwfwb.tj.gov.cn/"],
+  "linkPattern": "/(jyxxcggg|jyxxcgjg|jyxxxqgg|jyxxzcgz|jyxxzbjh|jyxxhtys)/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "首页“交易信息”各栏目滚动最新公告，详情页按栏目分目录（采购公告/采购结果/需求公告/资格预审等），用 linkPattern 收窄。"
+}

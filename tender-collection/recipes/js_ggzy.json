@@ -1,0 +1,14 @@
+{
+  "sourceKey": "js_ggzy",
+  "name": "江苏省公共资源交易平台",
+  "homepage": "http://jsggzy.jszwfw.gov.cn/",
+  "category": "地方级",
+  "region": "江苏省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["http://jsggzy.jszwfw.gov.cn/jyxx/tradeInfonew.html"],
+  "linkPattern": "/jyxx/\\d{6}/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "交易信息栏目；列表由脚本渲染，详情页形如 /jyxx/{大类}/{子类}/{日期}/{guid}.html，用 /jyxx/{6位}/{ 收窄，避免把栏目页当公告。"
+}

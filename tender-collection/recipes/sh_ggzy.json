@@ -1,0 +1,14 @@
+{
+  "sourceKey": "sh_ggzy",
+  "name": "上海市公共资源交易中心",
+  "homepage": "https://www.shggzy.com/",
+  "category": "地方级",
+  "region": "上海市",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.shggzy.com/search/queryContents.jhtml?channelId=2481"],
+  "contentSelectors": [".article-content", ".content", "#content"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "站内检索页；后续可改用其查询接口（api 模式）以进一步降低解析成本"
+}

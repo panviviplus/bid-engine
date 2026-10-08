@@ -1,0 +1,15 @@
+{
+  "sourceKey": "bj_ggzy",
+  "name": "北京市公共资源交易服务平台",
+  "homepage": "https://ggzyfw.beijing.gov.cn/",
+  "category": "地方级",
+  "region": "北京市",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://ggzyfw.beijing.gov.cn/jyxxcggg/index.html"],
+  "linkPattern": "",
+  "contentSelectors": [".detail-content", ".article-content", "#content"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "列表页由前端脚本渲染，需无头浏览器；链接规则待 /probe 验证后收敛"
+}

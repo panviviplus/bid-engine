@@ -1,0 +1,14 @@
+{
+  "sourceKey": "qh_ggzy",
+  "name": "青海公共资源交易网",
+  "homepage": "http://www.qhggzyjy.gov.cn/ggzy/",
+  "category": "地方级",
+  "region": "青海省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["http://www.qhggzyjy.gov.cn/ggzy/"],
+  "linkPattern": "projectDetail\\.html",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "首页滚动全省交易公告，详情页统一为 /ggzy/projectDetail.html?infoid=...。"
+}

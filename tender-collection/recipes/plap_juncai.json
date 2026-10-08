@@ -1,0 +1,14 @@
+{
+  "sourceKey": "plap_juncai",
+  "name": "军队采购网",
+  "homepage": "https://www.plap.mil.cn/",
+  "category": "国家级",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.plap.mil.cn/freecms-glht/site/juncai/cggg/index.html"],
+  "linkPattern": "/freecms/site/juncai/ggxx/info/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "军队采购网“采购大厅”，公开公告无需登录；列表由脚本渲染，需无头浏览器，详情页形如 /freecms/site/juncai/ggxx/info/{年}/{id}.html。"
+}

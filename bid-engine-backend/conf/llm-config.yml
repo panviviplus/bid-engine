@@ -1,0 +1,34 @@
+# 标擎 LLM 兜底配置
+#
+# 模型配置的来源与优先级：
+#   1. 用户级配置 user_llm_config（系统设置 - 模型配置 页面维护，业务模块实际使用）
+#   2. 全局配置 system_llm_config（超管维护，平台级后台任务使用，例如招标情报站采集打标）
+#   3. 本文件（仅在前两者都没有可用配置时兜底，见 pkg/repo/sysllm.Resolve 与 pkg/repo/llm）
+#
+# 说明：
+#   - 后端只会读取 providers.qwen 与 providers.deepseek 两个键（pkg/repo/llm/config.go）
+#   - base_url / model 留空时会自动填入下方注释中的默认值，api_key 留空表示未配置
+#   - 也可以用环境变量覆盖 api_key：SKB_LLM_DEEPSEEK_API_KEY、SKB_LLM_QWEN_API_KEY
+#   - 请勿把真实密钥提交到仓库；公开部署请在页面上配置，而不是写进本文件
+
+providers:
+  deepseek:
+    base_url: ""                       # 留空默认 https://api.deepseek.com/v1
+    endpoint_path: /chat/completions
+    api_key: ""                        # 必填项，留空则该兜底配置不可用
+    model: ""                          # 留空默认 deepseek-chat
+    timeout_seconds: 3600
+    default_temperature: 0.2
+    default_top_p: 0.9
+    default_max_tokens: 8192
+    insecure_skip_verify: false
+  qwen:
+    base_url: ""                       # 留空默认 https://dashscope.aliyuncs.com/compatible-mode/v1
+    endpoint_path: /chat/completions
+    api_key: ""                        # 必填项，留空则该兜底配置不可用
+    model: ""                          # 留空默认 qwen-plus
+    timeout_seconds: 3600
+    default_temperature: 0.2
+    default_top_p: 0.9
+    default_max_tokens: 8192
+    insecure_skip_verify: false

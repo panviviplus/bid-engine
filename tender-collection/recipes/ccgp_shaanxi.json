@@ -1,0 +1,14 @@
+{
+  "sourceKey": "ccgp_shaanxi",
+  "name": "陕西省政府采购网",
+  "homepage": "http://www.ccgp-shaanxi.gov.cn/",
+  "category": "地方级",
+  "region": "陕西省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["http://www.ccgp-shaanxi.gov.cn/"],
+  "linkPattern": "/freecms/site/shaanxi/ggxx/info/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "公告信息详情页统一为 /freecms/site/shaanxi/ggxx/info/{年}/{ID}.html。"
+}

@@ -1,0 +1,21 @@
+services:
+  backend:
+    image: bid-engine-backend:${BACKEND_TAG:-latest}
+    build:
+      context: ./bid-engine-backend
+      dockerfile: Dockerfile
+    container_name: bid-engine-backend
+    ports:
+      - "8081:8081"
+    environment:
+      - TZ=Asia/Shanghai
+      - FEISHU_APP_ID=${FEISHU_APP_ID:-}
+      - FEISHU_APP_SECRET=${FEISHU_APP_SECRET:-}
+      - FEISHU_PUBLIC_BASE_URL=${FEISHU_PUBLIC_BASE_URL:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./bid-engine-backend/conf/conf-container.yml:/service/conf/conf.yml
+      - ./bid-engine-backend/conf/llm-config.yml:/service/conf/llm-config.yml
+      - ./bid-engine-backend/logs:/service/logs
+    restart: unless-stopped

@@ -1,0 +1,7 @@
+env: test
+
+properties:
+  int: 1
+  float: 3.14
+  string: "123"
+

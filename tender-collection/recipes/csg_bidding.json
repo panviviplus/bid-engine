@@ -1,0 +1,13 @@
+{
+  "sourceKey": "csg_bidding",
+  "name": "中国南方电网采购平台",
+  "homepage": "https://www.bidding.csg.cn/",
+  "category": "国央企",
+  "region": "全国",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.bidding.csg.cn/zbcg/index.jhtml"],
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "静态请求只能拿到导航链接，公告列表需渲染后获取"
+}

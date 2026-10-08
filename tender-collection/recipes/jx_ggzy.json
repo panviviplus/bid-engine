@@ -1,0 +1,14 @@
+{
+  "sourceKey": "jx_ggzy",
+  "name": "江西省公共资源交易平台",
+  "homepage": "https://www.jxsggzy.cn/",
+  "category": "地方级",
+  "region": "江西省",
+  "discoveryMode": "list",
+  "needsBrowser": true,
+  "listUrls": ["https://www.jxsggzy.cn/jyxx/trade.html"],
+  "linkPattern": "/jyxx/\\d{6}/",
+  "maxItems": 50,
+  "maxPages": 1,
+  "note": "交易信息栏目；详情页形如 /jyxx/{大类}/{子类}/{日期}/{guid}.html。"
+}
