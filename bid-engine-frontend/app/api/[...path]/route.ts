@@ -4,12 +4,12 @@ function getUpstreamOrigin() {
   const raw =
     process.env.UPSTREAM_ORIGIN ||
     process.env.NEXT_PUBLIC_SYSTEM_SERVER ||
-    "https://bid-engine.modelapps.cn";
+    "http://localhost:1022";
   try {
     const u = new URL(raw);
     return u.origin;
   } catch {
-    return "https://bid-engine.modelapps.cn";
+    return "http://localhost:1022";
   }
 }
 

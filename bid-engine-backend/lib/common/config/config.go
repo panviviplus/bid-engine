@@ -6,6 +6,8 @@ import (
 	"sync"
 
 	"gopkg.in/yaml.v2"
+
+	"bid-engine/lib/common/confoverride"
 )
 
 var (
@@ -183,7 +185,9 @@ func MustLoadConfig(configFile string) {
 		if err != nil {
 			panic(err.Error())
 		}
-		err = yaml.Unmarshal(c, systemConf)
+		// 合并本地覆盖配置（conf-*.override.yml，不纳入版本管理），用于内网地址等环境相关配置
+		merged := confoverride.MergeBytes(configFile, c)
+		err = yaml.Unmarshal(merged, systemConf)
 		if err != nil {
 			// 解析失败，读取默认配置
 			panic(err.Error())

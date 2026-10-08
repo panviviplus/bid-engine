@@ -31,13 +31,9 @@ func getAllowedDomains() []string {
 		}
 		// 配置缺省时回落到内置默认后缀（修正为不带前导点）
 		if len(allowedDomains) == 0 {
-			allowedDomains = []string{
-				
-				
-				
-				
-				"modelapps.cn",
-			}
+			// 默认不放开任何外部域名：本地联调已在 isValidOrigin 中单独放开，
+			// 部署方通过 properties.cors_allowed_domains 配置自己的域名后缀。
+			allowedDomains = []string{}
 		}
 	})
 	return allowedDomains

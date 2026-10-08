@@ -16,6 +16,8 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ./bid-engine-backend/conf/conf-container.yml:/service/conf/conf.yml
+      # 可选的本地覆盖配置（不入仓库）：存在时用于覆盖内网地址、域名等环境相关信息
+      - ./bid-engine-backend/conf/conf-container.override.yml:/service/conf/conf.override.yml
       - ./bid-engine-backend/conf/llm-config.yml:/service/conf/llm-config.yml
       - ./bid-engine-backend/logs:/service/logs
     restart: unless-stopped

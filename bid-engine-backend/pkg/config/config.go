@@ -8,6 +8,8 @@ import (
 	"sync"
 
 	"gopkg.in/yaml.v3"
+
+	"bid-engine/lib/common/confoverride"
 )
 
 type store struct {
@@ -95,6 +97,8 @@ func load() (*store, error) {
 	if err := yaml.Unmarshal(data, &m); err != nil {
 		return nil, err
 	}
+	// 合并本地覆盖配置（conf-*.override.yml，不纳入版本管理），用于内网地址等环境相关配置
+	m = confoverride.MergeMap(path, m)
 	return &store{root: m}, nil
 }
 

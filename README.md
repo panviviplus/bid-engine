@@ -93,6 +93,29 @@
 - MySQL 8.0（root:root，库 `smart-bid`）
 - Redis 7 + Docling + MinIO（Docker 容器，通过 `docker compose` 管理）
 
+### 环境相关配置（可选覆盖）
+
+仓库里的 `bid-engine-backend/conf/conf-local.yml`、`conf-container.yml` 只包含通用默认值，
+不含内网地址、自定义域名等服务端私有信息。部署时按需创建同目录下的覆盖文件，加载时自动深合并（覆盖优先）：
+
+| 主配置 | 覆盖文件 |
+|---|---|
+| `conf-local.yml` | `conf-local.override.yml` |
+| `conf-container.yml`（容器内为 `conf.yml`） | `conf-container.override.yml`（容器内为 `conf.override.yml`） |
+
+覆盖文件已在 `.gitignore` 中，不会随仓库分发；也可以直接用环境变量
+`BID_ENGINE_CONF_OVERRIDE_FILE` 指定其他路径。典型内容：
+
+```yaml
+properties:
+  cors_allowed_domains: example.com      # 允许的跨域来源后缀，逗号分隔；留空表示只允许本地联调
+  pdf_base_url: http://127.0.0.1:5001    # 私有 PDF 服务地址（可选，未部署时相关能力不可用）
+  pdf_app_id: your_app_id
+  pdf_app_secret: your_app_secret
+```
+
+容器模式请同时保留 `docker-compose-backend.yaml` 中的覆盖文件挂载（文件不存在时自动忽略）。
+
 ### 一键启动
 
 ```bash

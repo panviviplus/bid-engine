@@ -134,10 +134,13 @@ minio:
 # 并把 properties.oss_type 改为 cos。请勿把真实密钥提交到仓库。
 
 properties:
-  pdf_base_url: http://10.19.2.100:31880
-  pdf_app_id: saas_document_writing
+  # 私有 PDF 服务（可选，部署方自有）；留空时相关能力不可用
+  pdf_base_url: http://127.0.0.1:5001
+  pdf_app_id:
   pdf_app_secret:
-  pdf_image_url: http://pdf-web.pdf-test
+  pdf_image_url:
+  # 允许的跨域来源后缀，逗号分隔，例如：example.com,example.org
+  cors_allowed_domains:
   api_base_url: http://host.docker.internal:8081
   oss_type: minio
   oss_base: bid-engine

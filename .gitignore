@@ -55,6 +55,12 @@ bid-engine-backend/test_panic
 bid-engine-backend/logs/
 bid-engine-backend/tmp/
 
+# 本地覆盖配置（内网地址、自定义域名等环境相关信息，只保留在本地）
+bid-engine-backend/conf/*.override.yml
+
+# 内部 CI 配置（保留在本地，不入仓库）
+bid-engine-backend/.gitlab-ci.yml
+
 # docs（产品文档默认忽略；V3 的可执行迁移和设计规范纳入版本管理）
 docs/*
 !docs/sql/
@@ -67,6 +73,7 @@ docs/sql/*
 !docs/sql/home_dashboard_indexes.sql
 !docs/sql/tender-intel.sql
 !docs/sql/feishu-import.sql
+!docs/sql/smart-bid.sql
 !docs/design/
 docs/design/*
 !docs/design/deep-sea-workbench.md
